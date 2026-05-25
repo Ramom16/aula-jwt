@@ -7,6 +7,10 @@ const authController = {
     criar: async (req, res) => {
         try {
             const {username, password} = req.body;
+
+            if(!username || !password)
+                return res.status(400).json({message: 'Username e password são obrigatórios'});
+            
             const userExists = await usuarioRepository.findByUserName(username.trim());
 
             if (userExists)
