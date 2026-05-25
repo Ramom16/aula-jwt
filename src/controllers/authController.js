@@ -18,7 +18,7 @@ const authController = {
 
             const hashedPassword = await bcrypto.hash(password, 10);
 
-            const userId = await usuarioRepository.create({ username, hashedPassword });
+            const userId = await usuarioRepository.create({ username, password: hashedPassword });
 
             res.status(201).json({message: 'Usuário criado com sucesso', userId});
         } catch (error) {
