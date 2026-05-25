@@ -45,7 +45,17 @@ const authController = {
                 {
                     expiresIn: '3m'
                 })
-            res.status(201).json({message: 'Usuário criado com sucesso', userId});
+            res.status(200).json({message: 'Login realizado com sucesso', token: accessToken});
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({message: 'Erro interno do servidor', errorMessage: error.message});
+        }
+    },
+    users: async (req, res) => {
+        try {
+            const result = await usuarioRepository.getAllUsers();
+
+            res.status(201).json({message: 'Usuário criado com sucesso', users: result});
         } catch (error) {
             console.error(error);
             return res.status(500).json({message: 'Erro interno do servidor', errorMessage: error.message});
